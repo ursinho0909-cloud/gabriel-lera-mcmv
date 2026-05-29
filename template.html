@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{SEO_TITLE}}</title>
+<meta name="description" content="{{SEO_DESCRIPTION}}">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  /* === PALETA — preencher a partir do briefing === */
+  --primary: {{COLOR_PRIMARY}};
+  --primary-dark: {{COLOR_PRIMARY_DARK}};
+  --primary-light: {{COLOR_PRIMARY_LIGHT}};
+  --accent: {{COLOR_ACCENT}};
+  --accent-light: {{COLOR_ACCENT_LIGHT}};
+  --accent-dark: {{COLOR_ACCENT_DARK}};
+  --bg: {{COLOR_BG}};
+  --bg-alt: {{COLOR_BG_ALT}};
+  --text: #1a1a1a;
+  --text-soft: #6a6a6a;
+  --white: #ffffff;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,.06);
+  --shadow-md: 0 8px 28px rgba(0,0,0,.10);
+  --shadow-lg: 0 20px 52px rgba(0,0,0,.18);
+  --radius: 14px;
+  --radius-sm: 10px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+
+.container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+
+h1, h2, h3 { font-family: 'Playfair Display', serif; line-height: 1.18; letter-spacing: -0.02em; }
+
+/* HEADER */
+.header {
+  position: absolute; top: 0; left: 0; right: 0; z-index: 10;
+  padding: 18px 0;
+}
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.brand {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--white);
+  letter-spacing: .01em;
+}
+.creci-badge {
+  font-size: 11px;
+  color: rgba(255,255,255,.85);
+  border: 1px solid rgba(255,255,255,.28);
+  padding: 5px 11px;
+  border-radius: 999px;
+  letter-spacing: .08em;
+  font-weight: 500;
+}
+
+/* HERO */
+.hero {
+  background: linear-gradient(180deg, var(--primary-dark) 0%, var(--primary) 100%);
+  color: var(--white);
+  padding: 78px 0 36px;
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -120px; right: -120px;
+  width: 420px; height: 420px;
+  background: radial-gradient(circle, rgba(201, 169, 97, .18), transparent 65%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -180px; left: -120px;
+  width: 380px; height: 380px;
+  background: radial-gradient(circle, rgba(201, 169, 97, .1), transparent 65%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.hero-inner { position: relative; z-index: 1; width: 100%; }
+.hero-top { text-align: center; max-width: 760px; margin: 0 auto 28px; }
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  background: rgba(201, 169, 97, .14);
+  border: 1px solid rgba(201, 169, 97, .35);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--accent-light);
+  margin-bottom: 18px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.hero-tag-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(201, 169, 97, .6); }
+  50% { box-shadow: 0 0 0 8px rgba(201, 169, 97, 0); }
+}
+.hero h1 {
+  font-size: clamp(26px, 3.6vw, 40px);
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.hero h1 em { font-style: italic; color: var(--accent); }
+.hero-sub {
+  font-size: clamp(14px, 1.4vw, 16px);
+  color: rgba(255,255,255,.78);
+  font-weight: 300;
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 32px;
+  align-items: start;
+  margin-top: 4px;
+}
+
+.video-col { display: flex; flex-direction: column; align-items: center; }
+.video-wrap {
+  width: 100%;
+  max-width: 320px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  background: #000;
+  aspect-ratio: 9/16;
+  cursor: pointer;
+  position: relative;
+}
+.video-el { width: 100%; height: 100%; object-fit: cover; display: block; }
+.video-unmute {
+  position: absolute;
+  top: 12px; right: 12px;
+  width: 36px; height: 36px;
+  background: rgba(0,0,0,.55);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--white);
+  cursor: pointer;
+  transition: all .2s;
+  z-index: 2;
+}
+.video-unmute:hover { background: rgba(0,0,0,.75); transform: scale(1.05); }
+.video-badge {
+  position: absolute;
+  bottom: 12px; left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,.65);
+  backdrop-filter: blur(8px);
+  color: var(--white);
+  font-size: 10.5px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  z-index: 2;
+}
+
+/* QUIZ */
+.quiz-col { width: 100%; }
+.quiz-card {
+  background: linear-gradient(180deg, var(--white) 0%, #fdfcf9 100%);
+  border-radius: var(--radius);
+  padding: 26px 26px 22px;
+  box-shadow: var(--shadow-lg), 0 0 0 1px rgba(201, 169, 97, .08);
+  color: var(--text);
+  position: relative;
+  overflow: hidden;
+}
+.quiz-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-light) 0%, var(--accent) 50%, var(--accent-light) 100%);
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+.quiz-card::after {
+  content: '';
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 140px; height: 140px;
+  background: radial-gradient(circle, rgba(201, 169, 97, .06), transparent 65%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.quiz-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+}
+.quiz-card-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  color: var(--primary-dark);
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.quiz-card-label svg { color: var(--accent); flex-shrink: 0; }
+.quiz-step-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 11.5px;
+  color: var(--primary-dark);
+  font-weight: 600;
+  letter-spacing: .04em;
+  background: var(--bg-alt);
+  padding: 4px 11px;
+  border-radius: 999px;
+}
+.quiz-step-num em { font-style: normal; color: var(--text-soft); font-weight: 500; }
+.quiz-progress { margin-bottom: 22px; position: relative; z-index: 1; }
+.quiz-progress-bar {
+  height: 6px;
+  background: var(--bg-alt);
+  border-radius: 999px;
+  overflow: hidden;
+  position: relative;
+}
+.quiz-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-light), var(--accent));
+  border-radius: 999px;
+  transition: width .6s cubic-bezier(.4, 0, .2, 1);
+  width: 16.66%;
+  box-shadow: 0 0 12px rgba(201, 169, 97, .35);
+  position: relative;
+}
+.quiz-progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 50%; right: -3px;
+  transform: translateY(-50%);
+  width: 12px; height: 12px;
+  background: var(--white);
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 0 3px rgba(201, 169, 97, .18), 0 2px 6px rgba(0,0,0,.1);
+}
+.quiz-step { display: none; position: relative; z-index: 1; }
+.quiz-step.active { display: block; }
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.quiz-step.active .quiz-question { animation: slideUp .45s ease; }
+.quiz-step.active .quiz-options > * { animation: slideUp .4s ease backwards; }
+.quiz-step.active .quiz-options > *:nth-child(1) { animation-delay: .06s; }
+.quiz-step.active .quiz-options > *:nth-child(2) { animation-delay: .12s; }
+.quiz-step.active .quiz-options > *:nth-child(3) { animation-delay: .18s; }
+.quiz-step.active .quiz-options > *:nth-child(4) { animation-delay: .24s; }
+.quiz-step.active .quiz-input:nth-of-type(1) { animation: slideUp .4s ease backwards; animation-delay: .06s; }
+.quiz-step.active .quiz-input:nth-of-type(2) { animation: slideUp .4s ease backwards; animation-delay: .14s; }
+.quiz-step.active .quiz-submit { animation: slideUp .4s ease backwards; animation-delay: .22s; }
+
+.quiz-question {
+  font-family: 'Playfair Display', serif;
+  font-size: 21px;
+  font-weight: 600;
+  margin-bottom: 18px;
+  color: var(--primary-dark);
+  line-height: 1.25;
+}
+.quiz-options { display: grid; gap: 9px; }
+.quiz-option {
+  background: linear-gradient(180deg, var(--bg) 0%, #f5f3ec 100%);
+  border: 1.5px solid transparent;
+  padding: 14px 44px 14px 18px;
+  border-radius: var(--radius-sm);
+  text-align: left;
+  font-size: 14.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all .22s cubic-bezier(.4, 0, .2, 1);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-family: inherit;
+  position: relative;
+}
+.quiz-option::after {
+  content: '→';
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--accent);
+  font-size: 16px;
+  font-weight: 600;
+  opacity: 0;
+  transition: all .22s;
+}
+.quiz-option:hover {
+  background: var(--white);
+  border-color: var(--accent);
+  box-shadow: 0 4px 14px rgba(201, 169, 97, .18);
+  transform: translateX(2px);
+}
+.quiz-option:hover::after { opacity: 1; right: 14px; }
+.quiz-option.selected {
+  background: var(--white);
+  border-color: var(--accent);
+  box-shadow: 0 4px 18px rgba(201, 169, 97, .28);
+}
+.quiz-option.selected::after { opacity: 0; }
+.quiz-option .check {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  border: 1.5px solid #d5d2c5;
+  flex-shrink: 0;
+  transition: all .22s;
+  position: relative;
+}
+.quiz-option:hover .check { border-color: var(--accent); }
+.quiz-option.selected .check {
+  border-color: var(--accent);
+  background: var(--accent);
+  box-shadow: 0 0 0 3px rgba(201, 169, 97, .18);
+}
+.quiz-option.selected .check::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  width: 5px; height: 9px;
+  border-right: 2px solid var(--white);
+  border-bottom: 2px solid var(--white);
+  margin-top: -1px;
+}
+.quiz-input {
+  width: 100%;
+  padding: 14px 18px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid #e8e5db;
+  font-size: 14.5px;
+  font-family: inherit;
+  margin-bottom: 9px;
+  transition: all .2s;
+  background: var(--bg);
+  color: var(--text);
+}
+.quiz-input::placeholder { color: #b3b0a3; }
+.quiz-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: var(--white);
+  box-shadow: 0 0 0 4px rgba(201, 169, 97, .12);
+}
+.quiz-nav {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 18px;
+  position: relative;
+  z-index: 1;
+}
+.quiz-back {
+  background: transparent;
+  border: none;
+  color: var(--text-soft);
+  font-size: 13px;
+  cursor: pointer;
+  padding: 6px 4px;
+  font-family: inherit;
+  font-weight: 500;
+  transition: all .18s;
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.quiz-back:hover { color: var(--primary); transform: translateX(-2px); }
+.quiz-back:disabled { opacity: 0; pointer-events: none; }
+.quiz-submit {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: var(--white);
+  border: none;
+  width: 100%;
+  padding: 16px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all .28s;
+  margin-top: 8px;
+  font-family: inherit;
+  letter-spacing: .01em;
+  box-shadow: 0 6px 20px rgba(122, 46, 53, .35), inset 0 1px 0 rgba(255,255,255,.08);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.quiz-submit::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 50%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(201, 169, 97, .35), transparent);
+  transition: left .7s ease;
+}
+.quiz-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(122, 46, 53, .4), inset 0 1px 0 rgba(255,255,255,.12);
+}
+.quiz-submit:hover::before { left: 150%; }
+.quiz-disclaimer {
+  text-align: center;
+  font-size: 11.5px;
+  color: var(--text-soft);
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.quiz-disclaimer svg { color: var(--accent); }
+
+/* HERO STATS */
+.hero-stats {
+  margin-top: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex-wrap: wrap;
+  gap: 0;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: var(--radius);
+  padding: 14px 0;
+  backdrop-filter: blur(6px);
+}
+.hero-stat { flex: 1; text-align: center; padding: 6px 18px; min-width: 160px; position: relative; }
+.hero-stat + .hero-stat::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 12%;
+  width: 1px; height: 76%;
+  background: rgba(255,255,255,.1);
+}
+.hero-stat strong {
+  color: var(--accent);
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 700;
+  display: block;
+  letter-spacing: -.01em;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.hero-stat span {
+  font-size: 12.5px;
+  color: rgba(255,255,255,.72);
+  letter-spacing: .02em;
+  display: block;
+}
+
+/* GALLERY */
+.gallery-section { background: var(--bg-alt); padding: 60px 0 70px; overflow: hidden; }
+.gallery-header { text-align: center; max-width: 600px; margin: 0 auto 36px; padding: 0 24px; }
+.gallery-header .tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  color: var(--accent-dark);
+  margin-bottom: 10px;
+}
+.gallery-header h2 {
+  font-size: clamp(22px, 3vw, 30px);
+  font-weight: 600;
+  color: var(--primary-dark);
+}
+.marquee {
+  overflow: hidden;
+  position: relative;
+  mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+}
+.marquee-track { display: flex; gap: 16px; width: max-content; animation: scroll 36s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-50% - 8px)); }
+}
+.gal-card {
+  width: 260px;
+  aspect-ratio: 4/3;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+  background: #ddd;
+  box-shadow: var(--shadow-sm);
+  transition: transform .3s;
+}
+.gal-card:hover { transform: scale(1.02); }
+.gal-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 4s ease; }
+.gal-card:hover img { transform: scale(1.08); }
+
+/* ABOUT */
+.about { background: var(--white); padding: 60px 0; }
+.about-inner { max-width: 680px; margin: 0 auto; text-align: center; }
+.about-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  color: var(--accent-dark);
+  margin-bottom: 12px;
+}
+.about h2 {
+  font-size: clamp(22px, 3vw, 30px);
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--primary-dark);
+}
+.about p { font-size: 15.5px; color: var(--text-soft); margin-bottom: 14px; line-height: 1.7; }
+.about-creci {
+  display: inline-block;
+  background: var(--bg-alt);
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  color: var(--primary-dark);
+  margin-top: 12px;
+}
+
+/* FOOTER */
+footer {
+  background: var(--primary-dark);
+  color: rgba(255,255,255,.7);
+  padding: 30px 0 24px;
+  text-align: center;
+  font-size: 13px;
+}
+footer .brand { color: var(--white); margin-bottom: 6px; font-size: 18px; }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .hero { min-height: auto; padding: 64px 0 30px; }
+  .hero-top { margin-bottom: 16px; }
+  .hero h1 { font-size: 24px; margin-bottom: 8px; }
+  .hero-sub { font-size: 13.5px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 16px; max-width: 440px; margin: 0 auto; }
+  .video-wrap { max-width: 220px; }
+  .hero-stats { flex-direction: column; padding: 8px 0; margin-top: 20px; }
+  .hero-stat { padding: 12px 18px; }
+  .hero-stat + .hero-stat::before { left: 12%; top: 0; width: 76%; height: 1px; }
+  .quiz-card { padding: 20px 18px; }
+  .quiz-question { font-size: 19px; margin-bottom: 14px; }
+  .quiz-progress { margin-bottom: 18px; }
+  .quiz-card-top { margin-bottom: 14px; }
+  .gal-card { width: 220px; }
+  .creci-badge { display: none; }
+  .container { padding: 0 18px; }
+}
+@media (max-width: 480px) {
+  .hero { padding: 60px 0 24px; }
+  .hero h1 { font-size: 21px; line-height: 1.2; }
+  .hero-sub { font-size: 12.5px; line-height: 1.45; }
+  .hero-top { margin-bottom: 12px; }
+  .hero-grid { gap: 12px; }
+  .video-wrap { max-width: 200px; }
+  .quiz-card { padding: 18px 16px; }
+  .quiz-question { font-size: 18px; margin-bottom: 12px; }
+  .quiz-option { padding: 12px 40px 12px 16px; font-size: 14px; }
+  .quiz-progress { margin-bottom: 16px; }
+  .quiz-card-top { margin-bottom: 12px; }
+  .quiz-card-label { font-size: 9.5px; letter-spacing: .12em; }
+  .quiz-step-num { font-size: 10.5px; padding: 3px 9px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ========== HEADER ========== -->
+<header class="header">
+  <div class="container header-inner">
+    <div class="brand">{{NOME}}</div>
+    <span class="creci-badge">{{REGISTRO}}</span>
+  </div>
+</header>
+
+<!-- ========== HERO ========== -->
+<section class="hero">
+  <div class="container hero-inner">
+
+    <div class="hero-top">
+      <div class="hero-tag">
+        <span class="hero-tag-dot"></span>
+        {{HERO_TAG}}
+      </div>
+      <h1>{{HERO_HEADLINE}}<br><em>{{HERO_HEADLINE_ITALICO}}</em></h1>
+      <p class="hero-sub">{{HERO_SUB}}</p>
+    </div>
+
+    <div class="hero-grid">
+
+      <!-- VIDEO -->
+      <div class="video-col">
+        <div class="video-wrap" id="videoWrap">
+          <video class="video-el" id="vid" src="{{VIDEO_SRC}}" autoplay muted loop playsinline preload="auto"></video>
+          <span class="video-badge">▶ Toque pra ouvir</span>
+          <button class="video-unmute" id="vidBtn" aria-label="Ativar som">
+            <svg id="iconMute" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3.27 3L2 4.27 7.73 10H3v4h4l5 5v-6.73L17.25 17l-1.27 1.27L3.27 3z"/></svg>
+            <svg id="iconSound" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- QUIZ -->
+      <div class="quiz-col">
+        <div class="quiz-card">
+          <div class="quiz-card-top">
+            <div class="quiz-card-label">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L4 6v6c0 5 3.5 9.5 8 10 4.5-.5 8-5 8-10V6l-8-4zm-1 14l-4-4 1.4-1.4L11 13.2l5.6-5.6L18 9l-7 7z"/></svg>
+              {{QUIZ_LABEL}}
+            </div>
+            <div class="quiz-step-num" id="stepNum">01<em> / 0{{QUIZ_TOTAL}}</em></div>
+          </div>
+
+          <div class="quiz-progress">
+            <div class="quiz-progress-bar">
+              <div class="quiz-progress-fill" id="progressFill"></div>
+            </div>
+          </div>
+
+          <!--
+            ============================================================
+            QUIZ STEPS — gerados a partir do briefing.
+            Cada pergunta vira um bloco:
+
+            <div class="quiz-step" data-step="N">
+              <div class="quiz-question">Pergunta aqui?</div>
+              <div class="quiz-options">
+                <button class="quiz-option" data-q="chave" data-v="Resposta visível">Resposta visível <span class="check"></span></button>
+                ...
+              </div>
+            </div>
+
+            O passo 1 leva a classe `active` adicional.
+            O ÚLTIMO passo é sempre o de captura (nome + WhatsApp).
+            ============================================================
+          -->
+
+          {{QUIZ_STEPS}}
+
+          <!-- ÚLTIMO PASSO: captura de lead -->
+          <div class="quiz-step" data-step="{{QUIZ_TOTAL}}">
+            <div class="quiz-question">{{QUIZ_LEAD_QUESTION}}</div>
+            <input type="text" class="quiz-input" id="leadNome" placeholder="Seu nome">
+            <input type="tel" class="quiz-input" id="leadWhats" placeholder="WhatsApp com DDD" maxlength="15">
+            <button class="quiz-submit" id="submitBtn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.52 3.48A11.93 11.93 0 0 0 12.04 0C5.46 0 .14 5.32.14 11.9c0 2.1.55 4.13 1.59 5.93L0 24l6.34-1.66a11.93 11.93 0 0 0 5.7 1.45h.01c6.58 0 11.9-5.32 11.9-11.9 0-3.18-1.24-6.17-3.43-8.41zM12.05 21.79h-.01a9.88 9.88 0 0 1-5.04-1.38l-.36-.21-3.75.98 1-3.66-.24-.38a9.85 9.85 0 0 1-1.51-5.24c0-5.46 4.44-9.9 9.91-9.9 2.65 0 5.14 1.03 7.01 2.91a9.86 9.86 0 0 1 2.9 7c0 5.46-4.44 9.9-9.9 9.9z"/></svg>
+              {{QUIZ_SUBMIT_TEXT}}
+            </button>
+            <div class="quiz-disclaimer">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V5l-9-4z"/></svg>
+              {{QUIZ_DISCLAIMER}}
+            </div>
+          </div>
+
+          <div class="quiz-nav">
+            <button class="quiz-back" id="backBtn" disabled><span>←</span> Voltar</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- STATS -->
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <strong>{{STAT_1_NUM}}</strong>
+        <span>{{STAT_1_LABEL}}</span>
+      </div>
+      <div class="hero-stat">
+        <strong>{{STAT_2_NUM}}</strong>
+        <span>{{STAT_2_LABEL}}</span>
+      </div>
+      <div class="hero-stat">
+        <strong>{{STAT_3_NUM}}</strong>
+        <span>{{STAT_3_LABEL}}</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========== GALERIA ========== -->
+<section class="gallery-section">
+  <div class="gallery-header">
+    <span class="tag">{{GALERIA_TAG}}</span>
+    <h2>{{GALERIA_TITULO}}</h2>
+  </div>
+  <div class="marquee">
+    <div class="marquee-track">
+      <!--
+        GALERIA — gerada a partir do briefing.
+        Cada imagem vira:  <div class="gal-card"><img src="img1.jpg" alt=""></div>
+        Duplicar a lista no fim do track para o loop ficar contínuo.
+      -->
+      {{GALERIA_IMAGENS}}
+    </div>
+  </div>
+</section>
+
+<!-- ========== SOBRE ========== -->
+<section class="about">
+  <div class="container about-inner">
+    <span class="about-tag">{{SOBRE_TAG}}</span>
+    <h2>{{SOBRE_TITULO}}</h2>
+    <p>{{SOBRE_TEXTO}}</p>
+    <div class="about-creci">{{SOBRE_ASSINATURA}}</div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="container">
+    <div class="brand">{{NOME}}</div>
+    <p>{{SOBRE_ASSINATURA}}</p>
+    <p style="margin-top: 8px; font-size: 11px; opacity: .55;">{{FOOTER_COPYRIGHT}}</p>
+  </div>
+</footer>
+
+<script>
+// === VIDEO UNMUTE ===
+const vid = document.getElementById('vid');
+const vidBtn = document.getElementById('vidBtn');
+const iconMute = document.getElementById('iconMute');
+const iconSound = document.getElementById('iconSound');
+const videoWrap = document.getElementById('videoWrap');
+
+function toggleSound() {
+  vid.muted = !vid.muted;
+  if (vid.muted) {
+    iconMute.style.display = '';
+    iconSound.style.display = 'none';
+  } else {
+    iconMute.style.display = 'none';
+    iconSound.style.display = '';
+    vid.play();
+  }
+}
+videoWrap.addEventListener('click', (e) => {
+  if (e.target.closest('.video-unmute')) return;
+  toggleSound();
+});
+vidBtn.addEventListener('click', (e) => { e.stopPropagation(); toggleSound(); });
+
+// === QUIZ ===
+const TOTAL = {{QUIZ_TOTAL}};
+let step = 1;
+const answers = {};
+
+const progressFill = document.getElementById('progressFill');
+const stepNum = document.getElementById('stepNum');
+const backBtn = document.getElementById('backBtn');
+
+function updateProgress() {
+  const pct = (step / TOTAL) * 100;
+  progressFill.style.width = pct + '%';
+  stepNum.innerHTML = String(step).padStart(2, '0') + '<em> / 0' + TOTAL + '</em>';
+  backBtn.disabled = step === 1;
+}
+function showStep(n) {
+  document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
+  document.querySelector('.quiz-step[data-step="' + n + '"]').classList.add('active');
+  step = n;
+  updateProgress();
+}
+
+document.querySelectorAll('.quiz-option').forEach(opt => {
+  opt.addEventListener('click', () => {
+    const s = opt.closest('.quiz-step');
+    s.querySelectorAll('.quiz-option').forEach(o => o.classList.remove('selected'));
+    opt.classList.add('selected');
+    answers[opt.dataset.q] = opt.dataset.v;
+    setTimeout(() => {
+      if (step < TOTAL) showStep(step + 1);
+    }, 320);
+  });
+});
+
+backBtn.addEventListener('click', () => {
+  if (step > 1) showStep(step - 1);
+});
+
+document.getElementById('submitBtn').addEventListener('click', () => {
+  const nome = document.getElementById('leadNome').value.trim();
+  const whats = document.getElementById('leadWhats').value.trim();
+  if (!nome || !whats) {
+    alert('Preencha seu nome e WhatsApp pra continuar.');
+    return;
+  }
+  // ====== MENSAGEM DO WHATSAPP — gerada a partir do briefing ======
+  const msg = {{WHATSAPP_MESSAGE_JS}};
+  const url = 'https://wa.me/{{WHATSAPP_NUMBER}}?text=' + encodeURIComponent(msg);
+  window.open(url, '_blank');
+});
+
+document.getElementById('leadWhats').addEventListener('input', (e) => {
+  let v = e.target.value.replace(/\D/g, '').slice(0, 11);
+  if (v.length > 6) v = '(' + v.slice(0,2) + ') ' + v.slice(2,7) + '-' + v.slice(7);
+  else if (v.length > 2) v = '(' + v.slice(0,2) + ') ' + v.slice(2);
+  e.target.value = v;
+});
+
+updateProgress();
+</script>
+
+</body>
+</html>
