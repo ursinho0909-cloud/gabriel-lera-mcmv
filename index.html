@@ -781,7 +781,7 @@ footer .brand {
               <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L4 6v6c0 5 3.5 9.5 8 10 4.5-.5 8-5 8-10V6l-8-4zm-1 14l-4-4 1.4-1.4L11 13.2l5.6-5.6L18 9l-7 7z"/></svg>
               SEU IMÓVEL EM 60 SEGUNDOS
             </div>
-            <div class="quiz-step-num" id="stepNum">01<em> / 06</em></div>
+            <div class="quiz-step-num" id="stepNum">01<em> / 07</em></div>
           </div>
 
           <div class="quiz-progress">
@@ -809,6 +809,15 @@ footer .brand {
           </div>
 
           <div class="quiz-step" data-step="3">
+            <div class="quiz-question">Você tem restrição no nome?</div>
+            <div class="quiz-options">
+              <button class="quiz-option" data-q="restricao" data-v="Não tenho restrição">Não tenho restrição <span class="check"></span></button>
+              <button class="quiz-option" data-q="restricao" data-v="Tenho restrição (Serasa/SPC)">Tenho restrição (Serasa/SPC) <span class="check"></span></button>
+              <button class="quiz-option" data-q="restricao" data-v="Não sei dizer">Não sei dizer <span class="check"></span></button>
+            </div>
+          </div>
+
+          <div class="quiz-step" data-step="4">
             <div class="quiz-question">Qual a renda da família?</div>
             <div class="quiz-options">
               <button class="quiz-option" data-q="renda" data-v="Até R$ 2.640">Até R$ 2.640 <span class="check"></span></button>
@@ -818,7 +827,7 @@ footer .brand {
             </div>
           </div>
 
-          <div class="quiz-step" data-step="4">
+          <div class="quiz-step" data-step="5">
             <div class="quiz-question">Que tipo de imóvel?</div>
             <div class="quiz-options">
               <button class="quiz-option" data-q="tipo" data-v="Apartamento">Apartamento <span class="check"></span></button>
@@ -828,7 +837,7 @@ footer .brand {
             </div>
           </div>
 
-          <div class="quiz-step" data-step="5">
+          <div class="quiz-step" data-step="6">
             <div class="quiz-question">Pra quando você quer fechar?</div>
             <div class="quiz-options">
               <button class="quiz-option" data-q="prazo" data-v="O quanto antes">O quanto antes <span class="check"></span></button>
@@ -838,7 +847,7 @@ footer .brand {
             </div>
           </div>
 
-          <div class="quiz-step" data-step="6">
+          <div class="quiz-step" data-step="7">
             <div class="quiz-question">Falta pouco. Como te chamo?</div>
             <input type="text" class="quiz-input" id="leadNome" placeholder="Seu nome">
             <input type="tel" class="quiz-input" id="leadWhats" placeholder="WhatsApp com DDD" maxlength="15">
@@ -950,7 +959,7 @@ videoWrap.addEventListener('click', (e) => {
 vidBtn.addEventListener('click', (e) => { e.stopPropagation(); toggleSound(); });
 
 // QUIZ
-const TOTAL = 6;
+const TOTAL = 7;
 let step = 1;
 const answers = {};
 
@@ -1002,6 +1011,7 @@ document.getElementById('submitBtn').addEventListener('click', () => {
     'Objetivo: ' + (answers.objetivo || '—') + '\n' +
     'Renda da família: ' + (answers.renda || '—') + '\n' +
     'FGTS: ' + (answers.fgts || '—') + '\n' +
+    'Restrição no nome: ' + (answers.restricao || '—') + '\n' +
     'Prazo: ' + (answers.prazo || '—') + '\n\n' +
     'Pode me mostrar os imóveis que combinam comigo?';
   const url = 'https://wa.me/5515998460906?text=' + encodeURIComponent(msg);
